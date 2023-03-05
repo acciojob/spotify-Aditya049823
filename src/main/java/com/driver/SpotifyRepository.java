@@ -103,7 +103,9 @@ public class SpotifyRepository {
         if (album == null) {
             throw new Exception("Album does not exist");
         } else {
-            Song song = new Song(title,length);
+            Song song = new Song();
+            song.setTitle(title);
+            song.setLength(length);
             song.setLikes(0);
             songs.add(song);
             if(albumSongMap.containsKey(album))
@@ -136,7 +138,8 @@ public class SpotifyRepository {
             throw new Exception("User does not exist");
         }
         else {
-        Playlist playlist=new Playlist(title);
+        Playlist playlist=new Playlist();
+        playlist.setTitle(title);
         playlists.add(playlist);
         List<Song>songlist=new ArrayList<>();
         for(Song song:songs)
@@ -180,7 +183,8 @@ public class SpotifyRepository {
         if(user==null){
             throw new Exception("User does not exist");
         }
-        Playlist playlist=new Playlist(title);
+        Playlist playlist=new Playlist();
+        playlist.setTitle(title);
         List<Song>songslist=new ArrayList<>();
         for(Song song:songs)
         {
