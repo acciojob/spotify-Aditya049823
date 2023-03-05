@@ -85,16 +85,13 @@ public class SpotifyController {
     @GetMapping("/popular-artist")
     public String mostPopularArtist(){
         //Return the artist name with maximum likes
-        String name="";
-        name=spotifyService.mostPopularArtist();
-        return name;
+        return spotifyService.mostPopularArtist();
     }
 
     @GetMapping("/popular-song")
     public String mostPopularSong(){
         //return the song title with maximum likes
-        String title="";
-        title= spotifyService.mostPopularSong();
-        return title;
+        return spotifyService.mostPopularSong();
+
     }
 }
