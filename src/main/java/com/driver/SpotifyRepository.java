@@ -95,7 +95,7 @@ public class SpotifyRepository {
     public Song createSong(String title, String albumName, int length) throws Exception {
         Album album = null;
         for (Album al : albums) {
-            if (al.getTitle().equals(albumName)) {
+            if (al.getTitle()==albumName) {
                 album = al;
                 break;
             }
@@ -136,7 +136,7 @@ public class SpotifyRepository {
         User user=null;
         for(User u:users)
         {
-            if(u.getMobile().equals(mobile))
+            if(u.getMobile()==mobile)
             {
                 user=u;
                 break;
@@ -173,7 +173,7 @@ public class SpotifyRepository {
         List<Song>songslist=new ArrayList<>();
         for(Song song:songs)
         {
-            if(song.getTitle().equals(title))
+            if(song.getTitle()==title)
             {
                 songslist.add(song);
             }
@@ -182,7 +182,7 @@ public class SpotifyRepository {
         User user=null;
         for(User u:users)
         {
-            if(u.getMobile().equals(mobile))
+            if(u.getMobile()==mobile)
             {
                 user=u;
                 break;
@@ -217,7 +217,7 @@ public class SpotifyRepository {
         Playlist playlist=null;
         for(Playlist p:playlists)
         {
-            if(p.getTitle().equals(playlistTitle))
+            if(p.getTitle()==playlistTitle)
             {
                 playlist=p;
                 break;
@@ -230,7 +230,7 @@ public class SpotifyRepository {
         User user=null;
         for(User u:users)
         {
-            if(u.getMobile().equals(mobile))
+            if(u.getMobile()==mobile)
             {
                 user=u;
                 break;
@@ -253,7 +253,7 @@ public class SpotifyRepository {
     public Song likeSong(String mobile, String songTitle) throws Exception {
         User user = null;
         for (User u : users) {
-            if (u.getMobile().equals(mobile)) {
+            if (u.getMobile()==mobile) {
                 user = u;
                 break;
             }
@@ -263,7 +263,7 @@ public class SpotifyRepository {
         }
         Song song = null;
         for (Song s : songs) {
-            if (s.getTitle().equals(songTitle)) {
+            if (s.getTitle()==songTitle) {
                 song = s;
                 break;
             }
