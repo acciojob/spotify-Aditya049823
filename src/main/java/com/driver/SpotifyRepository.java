@@ -38,27 +38,58 @@ public class SpotifyRepository {
     }
 
     public User createUser(String name, String mobile) {
-        User user=new User(name,mobile);
+        User user=new User();
+        user.setName(name);
+        user.setMobile(mobile);
         users.add(user);
         return user;
     }
 
     public Artist createArtist(String name) {
-        Artist artist=new Artist(name);
+        Artist artist=new Artist();
+        artist.setName(name);
+        artist.setLikes(0);
         artists.add(artist);
         return artist;
     }
 
     public Album createAlbum(String title, String artistName) {
-        if(!artists.contains(artistName))
-        {
-            Artist artist=new Artist(artistName);
-            artists.add(artist);
-        }
-        Album album=new Album(title);
-        albums.add(album);
-        artistAlbumMap.put(new Artist(artistName),albums);
-        return album;
+       Artist artist=null;
+       for(Artist artist1:artists)
+       {
+           if(artist.getName()==artistName)
+           {
+               artist=artist1;
+               break;
+           }
+       }
+       if(artist==null)
+       {
+           artist=createArtist(artistName);
+           Album album=new Album();
+           album.setTitle(title);
+           album.setReleaseDate(new Date());
+           albums.add(album);
+
+           List<Album>albumList=new ArrayList<>();
+           albumList.add(album);
+           artistAlbumMap.put(artist,albumList);
+           return album;
+       }
+       else {
+           Album album=new Album();
+           album.setTitle(title);
+           album.setReleaseDate(new Date());
+           albums.add(album);
+           List<Album>albumList=artistAlbumMap.get(artist);
+           if(albumList==null)
+           {
+               albumList=new ArrayList<>();
+           }
+           albumList.add(album);
+           artistAlbumMap.put(artist,albumList);
+           return album;
+       }
     }
 
     public Song createSong(String title, String albumName, int length) throws Exception {
@@ -72,9 +103,23 @@ public class SpotifyRepository {
         if (album == null) {
             throw new Exception("Album does not exist");
         } else {
-            Song song = new Song(title, length);
+            Song song = new Song(title,length);
+            song.setLikes(0);
             songs.add(song);
-            albumSongMap.put(album, songs);
+            List<Song>songList=albumSongMap.get(album);
+            songList.add(song);
+            albumSongMap.put(album, songList);
+            if(albumSongMap.containsKey(album))
+            {
+                List<Song>list=albumSongMap.get(album);
+                list.add(song);
+                albumSongMap.put(album,list);
+            }
+            else {
+                List<Song>list=new ArrayList<>();
+                list.add(song);
+                albumSongMap.put(album,list);
+            }
             return song;
         }
     }
