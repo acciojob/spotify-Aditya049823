@@ -106,9 +106,6 @@ public class SpotifyRepository {
             Song song = new Song(title,length);
             song.setLikes(0);
             songs.add(song);
-            List<Song>songList=albumSongMap.get(album);
-            songList.add(song);
-            albumSongMap.put(album, songList);
             if(albumSongMap.containsKey(album))
             {
                 List<Song>list=albumSongMap.get(album);
